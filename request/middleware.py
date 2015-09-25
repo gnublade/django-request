@@ -28,7 +28,8 @@ class RequestMiddleware(object):
             return response
 
         if getattr(request, 'user', False):
-            if request.user.username in settings.REQUEST_IGNORE_USERNAME:
+            username = getattr(request.user, request.user.USERNAME_FIELD)
+            if username in settings.REQUEST_IGNORE_USERNAME:
                 return response
 
         r = Request()
